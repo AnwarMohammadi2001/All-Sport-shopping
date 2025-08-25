@@ -7,13 +7,12 @@ const NavLinks = () => {
   const [hovered, setHovered] = useState("");
   const [delayedHovered, setDelayedHovered] = useState("");
 
-  // Add small delay before closing submenu (like Nike)
   useEffect(() => {
     let timeout;
     if (hovered) {
       setDelayedHovered(hovered);
     } else {
-      timeout = setTimeout(() => setDelayedHovered(""), 200); // delay closing
+      timeout = setTimeout(() => setDelayedHovered(""), 200);
     }
     return () => clearTimeout(timeout);
   }, [hovered]);
@@ -31,12 +30,7 @@ const NavLinks = () => {
         staggerChildren: 0.08,
       },
     },
-    exit: {
-      opacity: 0,
-      y: -15,
-      height: 0,
-      transition: { duration: 0.25, ease: "easeInOut" },
-    },
+    exit: { opacity: 0, y: -15, height: 0, transition: { duration: 0.25 } },
   };
 
   const itemVariants = {
@@ -49,20 +43,26 @@ const NavLinks = () => {
       {links.map((link) => (
         <div
           key={link.name}
-          className="relative group" // <-- add 'group' here
+          className="group"
           onMouseEnter={() => setHovered(link.name)}
           onMouseLeave={() => setHovered("")}
         >
           {/* Top nav item */}
-          <div className="px-4 text-left md:cursor-pointer relative">
-            <h1 className="py-5 flex items-center space-x-1 text-gray-800 hover:text-black transition-colors relative">
-              {link.name}
-              {/* Hover underline */}
-              <span className="absolute left-0 bottom-0 h-[2px] w-full bg-black scale-x-0 origin-left transition-transform duration-300 group-hover:scale-x-100"></span>
-            </h1>
-          </div>
+          <h1
+            className={`py-4 px-6 text-base font-semibold transition-colors cursor-pointer relative rounded-md 
+              ${
+                hovered === link.name
+                  ? "text-black"
+                  : hovered
+                  ? "text-gray-400"
+                  : "text-gray-800 hover:text-black"
+              }`}
+          >
+            {link.name}
+            <span className="absolute left-0 bottom-2 h-[2px] w-full bg-black scale-x-0 origin-left transition-transform duration-300 group-hover:scale-x-100"></span>
+          </h1>
 
-          {/* Desktop submenu */}
+          {/* Mega Menu */}
           <AnimatePresence>
             {link.submenu && delayedHovered === link.name && (
               <motion.div
@@ -70,11 +70,8 @@ const NavLinks = () => {
                 animate="visible"
                 exit="exit"
                 variants={dropdownVariants}
-                className="fixed left-0 right-0 w-full bg-white  border-gray-200 top-20 z-50"
+                className="absolute top-full -left-14  w-screen bg-white border-t border-gray-200 z-50"
               >
-                <div className="absolute inset-0 bg-black/50">
-
-                </div>
                 <div className="p-8 grid grid-cols-5 gap-10 max-w-7xl mx-auto">
                   {link.sublinks.map((mysublinks, i) => (
                     <motion.div key={i} variants={itemVariants}>
