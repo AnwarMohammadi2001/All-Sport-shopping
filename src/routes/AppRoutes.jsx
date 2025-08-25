@@ -4,7 +4,7 @@ import { SignedIn, SignedOut, RedirectToSignIn } from "@clerk/clerk-react";
 
 // Layouts
 import MainLayout from "../layouts/MainLayout";
-import NotFound from "../components/NotFound";
+
 import SignInPage from "../pages/SignInPage"; // fix typo: "SingIn" → "SignIn"
 // import DashboardLayout from "../layouts/DashboardLayout";
 
@@ -45,7 +45,6 @@ export default function AppRoutes() {
           />
 
           {/* 404 */}
-          <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>
     </BrowserRouter>

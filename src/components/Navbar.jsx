@@ -1,87 +1,60 @@
-import React, { useContext } from "react";
-import { FaSun, FaMoon } from "react-icons/fa";
-import { AppContext } from "../Context/Context";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { UserButton, SignedIn, SignedOut } from "@clerk/clerk-react";
+import Logo from "../assets/Logo.png";
+import NavLinks from "./NavLinks";
+import { FaHeart, FaUser, FaShoppingBag, FaSearch } from "react-icons/fa";
 
 const Navbar = () => {
-  const { theme, setTheme } = useContext(AppContext);
+  const [open, setOpen] = useState(false);
 
   return (
-    <nav className="sticky top-0 w-full bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 shadow-sm z-50">
-      <div className="max-w-7xl mx-auto px-6 py-3 flex justify-between items-center">
-        {/* Logo / Brand */}
-        <Link
-          to="/"
-          className="text-2xl font-extrabold text-blue-600 dark:text-blue-400 tracking-wide hover:opacity-80 transition"
-        >
-          Test
-        </Link>
-
-        {/* Nav Items */}
-        <div className="hidden md:flex items-center gap-x-6 font-medium">
-          <a
-            href="#posts"
-            className="hover:text-blue-600 dark:hover:text-blue-400 transition"
+    <nav className="bg-white fixed top-0 left-0 right-0 px-12 z-50 ">
+      <div className="grid grid-cols-3  relative">
+        {/* Left: Logo */}
+        <div className="flex items-center z-50">
+          <img src={Logo} alt="logo" className="md:cursor-pointer w-28" />
+          {/* Mobile menu button */}
+          <div
+            className="text-3xl md:hidden ml-4"
+            onClick={() => setOpen(!open)}
           >
-            Posts
-          </a>
-          <a
-            href="#users"
-            className="hover:text-blue-600 dark:hover:text-blue-400 transition"
-          >
-            Users
-          </a>
-          <a
-            href="#gallery"
-            className="hover:text-blue-600 dark:hover:text-blue-400 transition"
-          >
-            Gallery
-          </a>
-          <a
-            href="#contactus"
-            className="hover:text-blue-600 dark:hover:text-blue-400 transition"
-          >
-            Contact
-          </a>
+            <ion-icon name={`${open ? "close" : "menu"}`}></ion-icon>
+          </div>
         </div>
 
-        {/* Right Section */}
-        <div className="flex items-center gap-x-4">
-          {/* Clerk Auth */}
-          <div>
-            <SignedOut>
-              <Link
-                to="/signin"
-                className="px-5 py-2 text-sm font-medium rounded-lg bg-blue-600 text-white hover:bg-blue-700 transition"
-              >
-                Sign In
-              </Link>
-            </SignedOut>
+        {/* Center: NavLinks */}
+        <div className="  md:flex justify-center hidden">
+          <ul className="flex gap-1 uppercase items-center">
+            <NavLinks />
+          </ul>
+        </div>
 
-            <SignedIn>
-              <UserButton
-                appearance={{
-                  elements: {
-                    userButtonAvatarBox:
-                      "w-10 h-10 border border-gray-300 rounded-full",
-                  },
-                }}
-                afterSignOutUrl="/"
-              />
-            </SignedIn>
+        {/* Right: Search & Icons */}
+        <div className="md:flex hidden justify-end items-center space-x-6">
+          {/* Search Box */}
+          <div className="relative">
+            <input
+              type="text"
+              placeholder="Search products..."
+              className="pl-10 pr-4 py-2 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 w-56"
+            />
+            <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
           </div>
 
-          {/* Theme Toggle */}
-          <button
-            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-            className="flex items-center justify-center w-10 h-10 rounded-full border border-gray-400 dark:border-gray-500 hover:scale-105 transition"
-          >
-            {theme === "dark" ? (
-              <FaSun className="w-5 h-5 text-yellow-400" />
-            ) : (
-              <FaMoon className="w-5 h-5 text-gray-700 dark:text-gray-300" />
-            )}
+          {/* Wishlist Icon */}
+          <button className="text-gray-600 hover:text-blue-500 transition-colors text-xl">
+            <FaHeart />
+          </button>
+
+          {/* Account Icon */}
+          <button className="text-gray-600 hover:text-blue-500 transition-colors text-xl">
+            <FaUser />
+          </button>
+
+          {/* Shopping Bag Icon */}
+          <button className="text-gray-600 hover:text-blue-500 transition-colors text-xl relative">
+            <FaShoppingBag />
+            {/* Optional: badge for items count */}
           </button>
         </div>
       </div>
