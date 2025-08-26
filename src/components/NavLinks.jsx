@@ -49,7 +49,7 @@ const NavLinks = () => {
         >
           {/* Top nav item */}
           <h1
-            className={`py-4 px-6 text-base font-semibold transition-colors cursor-pointer relative rounded-md 
+            className={`py-4 px-4 text-base font-semibold transition-colors cursor-pointer relative rounded-md 
               ${
                 hovered === link.name
                   ? "text-black"
@@ -70,7 +70,7 @@ const NavLinks = () => {
                 animate="visible"
                 exit="exit"
                 variants={dropdownVariants}
-                className="absolute top-full -left-14  w-screen bg-white border-t border-gray-200 z-50"
+                className="absolute top-full -left-16  w-screen bg-white border-t border-gray-200 z-50"
               >
                 <div className="p-8 grid grid-cols-5 gap-10 max-w-7xl mx-auto">
                   {link.sublinks.map((mysublinks, i) => (
