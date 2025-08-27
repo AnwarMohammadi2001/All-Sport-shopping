@@ -5,6 +5,7 @@ import SearchBar from "./SearchBar";
 import { PiHeartStraight } from "react-icons/pi";
 import { LuUser } from "react-icons/lu";
 import { AiOutlineShopping } from "react-icons/ai";
+import { Link, Links } from "react-router-dom";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
@@ -40,9 +41,12 @@ const Navbar = () => {
             <button className="text-gray-600 hover:text-blue-500 hover:-translate-y-1 transform transition-all duration-300">
               <PiHeartStraight size={26} />
             </button>
-            <button className="text-gray-600 hover:text-blue-500 hover:-translate-y-1 transform transition-all duration-300">
+            <Link
+              to="signin"
+              className="text-gray-600 hover:text-blue-500 hover:-translate-y-1 transform transition-all duration-300"
+            >
               <LuUser size={26} />
-            </button>
+            </Link>
             <button className="text-gray-600 hover:text-blue-500 hover:-translate-y-1 transform transition-all duration-300">
               <AiOutlineShopping size={26} />
             </button>
