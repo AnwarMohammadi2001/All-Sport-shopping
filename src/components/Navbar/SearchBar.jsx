@@ -3,7 +3,7 @@ import { FiSearch } from "react-icons/fi";
 import { X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import Logo from "../assets/Logo.png";
+import Logo from "../../assets/Logo.png";
 import { PiHeartStraight } from "react-icons/pi";
 
 const SearchBar = () => {

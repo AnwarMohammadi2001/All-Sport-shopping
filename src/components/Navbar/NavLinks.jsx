@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { links } from "../assets/navlink";
+import { links } from "../../assets/navlink";
 
 const NavLinks = () => {
   const [hovered, setHovered] = useState("");
@@ -49,7 +49,7 @@ const NavLinks = () => {
         >
           {/* Top nav item */}
           <h1
-            className={`py-4 px-4 text-base font-semibold transition-colors cursor-pointer relative rounded-md 
+            className={`py-2 px-2  text-base font-semibold transition-colors cursor-pointer relative rounded-md 
               ${
                 hovered === link.name
                   ? "text-black"
@@ -59,7 +59,7 @@ const NavLinks = () => {
               }`}
           >
             {link.name}
-            <span className="absolute left-0 bottom-2 h-[2px] w-full bg-black scale-x-0 origin-left transition-transform duration-300 group-hover:scale-x-100"></span>
+            <span className="absolute left-0 bottom-0 h-[2px] w-full bg-black scale-x-0 origin-left transition-transform duration-300 group-hover:scale-x-100"></span>
           </h1>
 
           {/* Mega Menu */}
@@ -70,7 +70,7 @@ const NavLinks = () => {
                 animate="visible"
                 exit="exit"
                 variants={dropdownVariants}
-                className="absolute top-full -left-16  w-screen bg-white border-t border-gray-200 z-50"
+                className="absolute top-full -left-16  w-screen bg-white border-gray-200 z-50"
               >
                 <div className="p-8 grid grid-cols-5 gap-10 max-w-7xl mx-auto">
                   {link.sublinks.map((mysublinks, i) => (

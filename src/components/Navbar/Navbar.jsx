@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Logo from "../assets/Logo.png";
+import Logo from "../../assets/Logo.png";
 import NavLinks from "./NavLinks";
 import SearchBar from "./SearchBar";
 import { PiHeartStraight } from "react-icons/pi";
@@ -14,7 +14,7 @@ const Navbar = () => {
       <div className="max-w-full mx-auto px-12">
         <div className="grid grid-cols-3 items-center relative">
           {/* Center: NavLinks */}
-          <div className="hidden md:flex items-center relative w-full">
+          <div className="hidden md:flex items-center gap-x-2 py-2 relative w-full">
             {/* Add relative here for submenu absolute positioning */}
             <NavLinks />
           </div>
