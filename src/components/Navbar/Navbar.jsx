@@ -11,6 +11,7 @@ import { FiSearch } from "react-icons/fi";
 import MobileSearchBox from "./MobileSearchBox";
 import ResponsiveNav from "./ResponsiveNav";
 import { IoClose } from "react-icons/io5";
+import Drawer from "../Drawer";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
@@ -18,6 +19,7 @@ const Navbar = () => {
   const [isExpanded, setIsExpanded] = useState(false);
   const handleSearchClick = () => setIsExpanded(true);
   const [opens, setOpens] = useState(false); // mobile menu
+  const [isDrawerOpens, setIsDrawerOpens] = useState(false); // cart drawer
 
   return (
     <nav className="bg-white sticky top-0 py-2 md:py-0 z-50 shadow-md">
@@ -67,7 +69,10 @@ const Navbar = () => {
             >
               <LuUser size={26} />
             </Link>
-            <button className="text-gray-600 hover:text-blue-500 hover:-translate-y-1 transform transition-all duration-300">
+            <button
+              onClick={() => setIsDrawerOpens(true)}
+              className="text-gray-600 hover:text-blue-500 hover:-translate-y-1 transform transition-all duration-300"
+            >
               <AiOutlineShopping size={26} />
             </button>
           </div>
@@ -92,6 +97,7 @@ const Navbar = () => {
           </div>
         </div>
       )}
+      {isDrawerOpens && <Drawer isDrawerOpens={isDrawerOpens} setIsDrawerOpens={setIsDrawerOpens} />}
     </nav>
   );
 };
