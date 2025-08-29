@@ -5,32 +5,40 @@ import SearchBar from "./SearchBar";
 import { PiHeartStraight } from "react-icons/pi";
 import { LuUser } from "react-icons/lu";
 import { AiOutlineShopping } from "react-icons/ai";
-import { Link, Links } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { HiOutlineMenuAlt2 } from "react-icons/hi";
 import { FiSearch } from "react-icons/fi";
+import MobileSearchBox from "./MobileSearchBox";
+import ResponsiveNav from "./ResponsiveNav";
+import { IoClose } from "react-icons/io5";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
+  const [showSearch, setShowSearch] = useState(false); // ✅ search toggle
+  const [isExpanded, setIsExpanded] = useState(false);
+  const handleSearchClick = () => setIsExpanded(true);
+  const [opens, setOpens] = useState(false); // mobile menu
 
   return (
     <nav className="bg-white sticky top-0 py-2 md:py-0 z-50 shadow-md">
       <div className="max-w-full mx-auto px-4 sm:px-5 md:px-12">
         <div className="grid grid-cols-3 items-center relative">
-          {/* Center: NavLinks */}
+          {/* Left (Mobile): Menu & Search icons */}
           <div className="md:hidden flex items-center gap-x-5 py-2">
-            <span>
+            <span onClick={() => setOpens(true)}>
               <HiOutlineMenuAlt2 size={24} className="cursor-pointer" />
             </span>
-            <span>
+            <span onClick={handleSearchClick}>
               <FiSearch size={22} className="cursor-pointer" />
             </span>
           </div>
+
+          {/* Center: NavLinks */}
           <div className="hidden md:flex items-center gap-x-2 py-2 relative w-full">
-            {/* Add relative here for submenu absolute positioning */}
             <NavLinks />
           </div>
 
-          {/* Left: Logo */}
+          {/* Logo */}
           <div className="flex items-center justify-center">
             <img
               src={Logo}
@@ -45,7 +53,7 @@ const Navbar = () => {
             </div>
           </div>
 
-          {/* Right: Search & Icons */}
+          {/* Right: Icons */}
           <div className="flex justify-end items-center space-x-6">
             <div className="hidden md:block">
               <SearchBar />
@@ -64,7 +72,26 @@ const Navbar = () => {
             </button>
           </div>
         </div>
+
+        {/* Mobile SearchBar */}
+        {isExpanded && (
+          <div className="md:hidden mt-2">
+            <MobileSearchBox
+              isExpanded={isExpanded}
+              setIsExpanded={setIsExpanded}
+            />
+          </div>
+        )}
       </div>
+      {/* ✅ Mobile Menu Drawer */}
+      {opens && (
+        <div className="fixed inset-0 bg-black/50 z-50">
+          <div className="bg-white w-72 h-full shadow-lg p-4 overflow-y-auto">
+            {/* Nav Links (Mobile Mode) */}
+            <ResponsiveNav isMobile={true} setOpens={setOpens} />
+          </div>
+        </div>
+      )}
     </nav>
   );
 };
