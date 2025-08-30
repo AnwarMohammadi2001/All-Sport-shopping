@@ -1,7 +1,12 @@
 import React from "react";
+import HeroMain from "../components/Hero/HeroMain";
 
 const Home = () => {
-  return <div className="max-w-7xl mx-auto min-h-screen bg-gray-600   border-gray-200">Home</div>;
+  return (
+    <div className="">
+      <HeroMain />
+    </div>
+  );
 };
 
 export default Home;
