@@ -23,10 +23,10 @@ const Navbar = () => {
 
   return (
     <nav className="bg-white sticky top-0 py-2 md:py-0 z-50 shadow-md">
-      <div className="max-w-full mx-auto px-4 sm:px-5 md:px-12">
+      <div className="max-w-full mx-auto px-4 sm:px-5 lg:px-12">
         <div className="grid grid-cols-3 items-center relative">
           {/* Left (Mobile): Menu & Search icons */}
-          <div className="md:hidden flex items-center gap-x-5 py-2">
+          <div className="lg:hidden flex items-center gap-x-5 py-2">
             <span onClick={() => setOpens(true)}>
               <HiOutlineMenuAlt2 size={24} className="cursor-pointer" />
             </span>
@@ -36,7 +36,7 @@ const Navbar = () => {
           </div>
 
           {/* Center: NavLinks */}
-          <div className="hidden md:flex items-center gap-x-2 py-2 relative w-full">
+          <div className="hidden lg:flex items-center gap-x-2 py-2 relative w-full">
             <NavLinks />
           </div>
 
@@ -57,7 +57,7 @@ const Navbar = () => {
 
           {/* Right: Icons */}
           <div className="flex justify-end items-center space-x-6">
-            <div className="hidden md:block">
+            <div className="hidden lg:block">
               <SearchBar />
             </div>
             <button className="text-gray-600 hidden md:block hover:text-blue-500 hover:-translate-y-1 transform transition-all duration-300">
@@ -80,7 +80,7 @@ const Navbar = () => {
 
         {/* Mobile SearchBar */}
         {isExpanded && (
-          <div className="md:hidden mt-2">
+          <div className="lg:hidden mt-2">
             <MobileSearchBox
               isExpanded={isExpanded}
               setIsExpanded={setIsExpanded}
