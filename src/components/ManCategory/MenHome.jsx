@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
@@ -10,6 +10,9 @@ import HomeProductCard from "../Card/HomeProductCard";
 const MenHome = () => {
   const prevRef = useRef(null);
   const nextRef = useRef(null);
+
+  const [isBeginning, setIsBeginning] = useState(true);
+  const [isEnd, setIsEnd] = useState(false);
 
   const products = [
     {
@@ -40,10 +43,24 @@ const MenHome = () => {
       image2: "men/image2.webp",
       sizes: ["M", "L", "XL"],
     },
+    {
+      id: 5,
+      name: "Zip Hoodie",
+      image1: "men/image1.webp",
+      image2: "men/image2.webp",
+      sizes: ["S", "M", "L"],
+    },
+    {
+      id: 6,
+      name: "Tank Top",
+      image1: "men/image1.webp",
+      image2: "men/image2.webp",
+      sizes: ["M", "L", "XL"],
+    },
   ];
 
   return (
-    <div className="h-[90vh] w-full ">
+    <div className="h-[90vh] w-full">
       <div className="px-5 md:px-10 lg:px-12 pt-10">
         <h2 className="text-xl font-bold text-gray-700">Mens</h2>
         <div className="flex items-center justify-between gap-x-5">
@@ -58,13 +75,23 @@ const MenHome = () => {
           <div className="flex items-center gap-x-5">
             <button
               ref={prevRef}
-              className="bg-black text-white p-2 rounded-full hover:bg-gray-800 cursor-pointer transition-colors duration-300"
+              disabled={isBeginning}
+              className={`p-2 rounded-full transition-colors duration-300 ${
+                isBeginning
+                  ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+                  : "bg-black text-white hover:bg-gray-800 cursor-pointer"
+              }`}
             >
               <IoIosArrowBack />
             </button>
             <button
               ref={nextRef}
-              className="bg-black text-white p-2 rounded-full hover:bg-gray-800 cursor-pointer transition-colors duration-300"
+              disabled={isEnd}
+              className={`p-2 rounded-full transition-colors duration-300 ${
+                isEnd
+                  ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+                  : "bg-black text-white hover:bg-gray-800 cursor-pointer"
+              }`}
             >
               <IoIosArrowForward />
             </button>
@@ -75,18 +102,25 @@ const MenHome = () => {
       {/* Swiper Slider */}
       <Swiper
         modules={[Navigation]}
-        spaceBetween={20}
-        slidesPerView={4}
+        spaceBetween={0} // space between each card
+        slidesPerView={4.3} // auto-fit cards instead of fixed count
+        slidesOffsetBefore={40} // left padding
+        slidesOffsetAfter={30} // right padding
         onInit={(swiper) => {
           swiper.params.navigation.prevEl = prevRef.current;
           swiper.params.navigation.nextEl = nextRef.current;
           swiper.navigation.init();
           swiper.navigation.update();
         }}
-        className="mt-3"
+        onSlideChange={(swiper) => {
+          setIsBeginning(swiper.isBeginning);
+          setIsEnd(swiper.isEnd);
+        }}
+        className="mt-5"
       >
         {products.map((product) => (
-          <SwiperSlide key={product.id}>
+          <SwiperSlide key={product.id} className="">
+            {/* fixed width for each card */}
             <HomeProductCard product={product} />
           </SwiperSlide>
         ))}
