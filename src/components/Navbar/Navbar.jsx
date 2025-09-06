@@ -22,7 +22,7 @@ const Navbar = () => {
   const [isDrawerOpens, setIsDrawerOpens] = useState(false); // cart drawer
 
   return (
-    <nav className="bg-white sticky top-0 py-2 md:py-0 z-50 shadow-md">
+    <nav className="bg-white sticky top-0 py-2 md:py-2 z-50 shadow-md">
       <div className="max-w-full mx-auto px-4 sm:px-5 lg:px-12">
         <div className="grid grid-cols-3 items-center relative">
           {/* Left (Mobile): Menu & Search icons */}

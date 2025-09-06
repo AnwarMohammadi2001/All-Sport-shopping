@@ -1,12 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import { MdArrowForwardIos, MdArrowBackIos } from "react-icons/md";
 import {
   contentContainer,
   contentItem,
-  container,
-  fadeeIn,
 } from "../../utils/framermotion/variants"; // Update this path as needed
 import { motion } from "framer-motion";
 import "swiper/css";
@@ -18,32 +16,35 @@ const HeroMain = () => {
   const [prevEl, setPrevEl] = useState(null);
   const [nextEl, setNextEl] = useState(null);
 
+  // progress state
+  const [progress, setProgress] = useState(0);
+
   const sliders = [
     {
       id: 1,
-      title: "Transport & Cargo Solution",
-      desc: "Fast, safe, and efficient transportation for all your cargo needs around the globe.",
-      image: "/slider/ab1.webp",
+      title: "Push Your Limits",
+      desc: "Achieve your fitness goals with modern equipment and expert trainers guiding you.",
+      image: "/slider/gym1.webp",
     },
     {
       id: 2,
-      title: "Fast Delivery Service",
-      desc: "Quick delivery services to ensure your packages arrive on time every time.",
-      image: "/slider/ab1.webp",
+      title: "Strength & Power",
+      desc: "Build strength and endurance with personalized workout plans tailored for you.",
+      image: "/slider/gym2.jpg",
     },
     {
       id: 3,
-      title: "Trusted by Thousands",
-      desc: "Our customers trust us with their valuable shipments and logistics every day.",
-      image: "/slider/ab2.jpg",
+      title: "Stay Fit, Stay Healthy",
+      desc: "Join our community and take your fitness journey to the next level.",
+      image: "/slider/gym3.jpg",
     },
   ];
 
   return (
-    <div className="w-full h-screen md:h-[400px] lg:h-[690px] relative group">
+    <div className="w-full h-[80vh]  md:h-[400px] lg:h-[590px] relative group">
       <Swiper
         modules={[Navigation, Pagination, Autoplay]}
-        pagination={{ clickable: true }}
+      
         autoplay={{ delay: 5000 }}
         slidesPerView={1}
         loop={true}
@@ -55,6 +56,9 @@ const HeroMain = () => {
         }}
         grabCursor={true}
         className="overflow-visible shadow-lg cursor-pointer h-full relative"
+        onAutoplayTimeLeft={(_, time, progressRatio) => {
+          setProgress(1 - progressRatio); // progress goes from 0 → 1
+        }}
       >
         {sliders.map((slide, index) => (
           <SwiperSlide key={index}>
@@ -62,7 +66,7 @@ const HeroMain = () => {
               variants={contentContainer}
               initial="hidden"
               animate="show"
-              className="w-full min-h-screen md:h-[400px] lg:h-[690px] bg-cover bg-center relative flex pt-28 md:pt-0 md:items-center justify-center"
+              className="w-full h-full md:h-[400px] lg:h-[590px] bg-cover bg-center relative flex pt-28 md:pt-0 items-center justify-center"
               style={{ backgroundImage: `url(${slide.image})` }}
             >
               <div className="absolute inset-0 bg-black/50"></div>
@@ -70,7 +74,7 @@ const HeroMain = () => {
                 variants={contentContainer}
                 initial="hidden"
                 animate="show"
-                className="relative z-10 px-6 md:px-16 text-white space-y-4 max-w-2xl"
+                className="relative z-10 px-6 md:px-16 text-white flex flex-col items-center space-y-4 max-w-2xl"
               >
                 <motion.h2
                   variants={contentItem}
@@ -90,15 +94,9 @@ const HeroMain = () => {
                 >
                   <Link
                     to="/quote"
-                    className="bg-primary hover:bg-blue-600 text-lg font-bold text-center cursor-pointer text-white px-5 py-4 rounded-md transition duration-300 w-[220px]"
+                    className="text-lg font-bold text-center cursor-pointer text-black bg-white py-3 rounded-full transition duration-300 px-10"
                   >
-                    Track Your Cargo
-                  </Link>
-                  <Link
-                    to="/contact"
-                    className="bg-white text-primary cursor-pointer text-center text-lg font-bold hover:bg-gray-100 px-5 py-4 rounded-md transition duration-300 w-[220px]"
-                  >
-                    Get a Quote
+                    Shop Now
                   </Link>
                 </motion.div>
               </motion.div>
@@ -108,12 +106,12 @@ const HeroMain = () => {
       </Swiper>
 
       {/* Navigation buttons */}
-      <div className="absolute bottom-[190px] md:top-2/3 right-1/2 translate-x-1/2 md:right-16 md:translate-x-0 z-20 flex md:flex-col gap-10 group">
+      <div className="absolute bottom-[100px] md:bottom-[190px] md:top-2/3 right-1/2 translate-x-1/2 md:right-16 md:translate-x-0 z-20 flex md:flex-col gap-10 group">
         <button
           ref={(node) => setNextEl(node)}
           onMouseDown={(e) => e.preventDefault()}
           aria-label="Next Slide"
-          className="w-[50px] h-[50px]  items-center justify-center rounded-full border border-white text-white shadow-md cursor-pointer hidden hover:bg-primary group-hover:flex transition"
+          className="p-4 items-center justify-center rounded-full border border-white text-white shadow-md cursor-pointer hidden hover:bg-white hover:text-black group-hover:flex transition"
         >
           <MdArrowForwardIos size={24} />
         </button>
@@ -122,10 +120,37 @@ const HeroMain = () => {
           ref={(node) => setPrevEl(node)}
           onMouseDown={(e) => e.preventDefault()}
           aria-label="Previous Slide"
-          className="w-[50px] h-[50px]  items-center justify-center rounded-full border border-white text-white shadow-md cursor-pointer hidden hover:bg-primary group-hover:flex transition"
+          className="p-4 hidden items-center justify-center rounded-full border border-white text-white shadow-md cursor-pointer hover:bg-white hover:text-black group-hover:flex transition"
         >
           <MdArrowBackIos size={24} />
         </button>
+      </div>
+
+      {/* Circular progress indicator */}
+      <div className="absolute bottom-5 left-10 z-20">
+        <svg className="w-14 h-14 -rotate-90">
+          <circle
+            className="text-gray-400"
+            strokeWidth="4"
+            stroke="currentColor"
+            fill="transparent"
+            r="24"
+            cx="28"
+            cy="28"
+          />
+          <circle
+            className="text-white"
+            strokeWidth="4"
+            strokeDasharray={2 * Math.PI * 24}
+            strokeDashoffset={2 * Math.PI * 24 * (1 - progress)}
+            strokeLinecap="round"
+            stroke="currentColor"
+            fill="transparent"
+            r="24"
+            cx="28"
+            cy="28"
+          />
+        </svg>
       </div>
     </div>
   );
