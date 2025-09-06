@@ -102,10 +102,27 @@ const MenHome = () => {
       {/* Swiper Slider */}
       <Swiper
         modules={[Navigation]}
-        spaceBetween={0} // space between each card
-        slidesPerView={4.3} // auto-fit cards instead of fixed count
-        slidesOffsetBefore={40} // left padding
-        slidesOffsetAfter={30} // right padding
+        spaceBetween={0}
+        slidesPerView={4.3} // default (desktop)
+        slidesOffsetBefore={40}
+        slidesOffsetAfter={30}
+        breakpoints={{
+          0: {
+            slidesPerView: 1.3,
+            slidesOffsetBefore: 20,
+            slidesOffsetAfter: 20,
+          },
+          768: {
+            slidesPerView: 2.3,
+            slidesOffsetBefore: 30,
+            slidesOffsetAfter: 30,
+          },
+          1024: {
+            slidesPerView: 4.3,
+            slidesOffsetBefore: 40,
+            slidesOffsetAfter: 30,
+          },
+        }}
         onInit={(swiper) => {
           swiper.params.navigation.prevEl = prevRef.current;
           swiper.params.navigation.nextEl = nextRef.current;
@@ -119,8 +136,7 @@ const MenHome = () => {
         className="mt-5"
       >
         {products.map((product) => (
-          <SwiperSlide key={product.id} className="">
-            {/* fixed width for each card */}
+          <SwiperSlide key={product.id}>
             <HomeProductCard product={product} />
           </SwiperSlide>
         ))}

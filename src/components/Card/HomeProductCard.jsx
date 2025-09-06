@@ -1,10 +1,12 @@
+import { Heart } from "lucide-react";
 import React, { useState } from "react";
+import { PiHeartStraight } from "react-icons/pi";
 
 const HomeProductCard = ({ product }) => {
   const [hovered, setHovered] = useState(false);
 
   // All standard sizes we want to display
-  const allSizes = ["S", "M", "L", "XL", "XXL"];
+  const allSizes = ["XS","S", "M", "L", "XL", "XXL" , "3XL"];
 
   return (
     <div
@@ -21,7 +23,7 @@ const HomeProductCard = ({ product }) => {
 
       {/* Sizes Overlay */}
       <div
-        className={`absolute bottom-0 left-0 w-full bg-white text-black flex justify-center gap-4 py-3 transition-all duration-500 ${
+        className={`absolute bottom-0 left-0 w-full bg-gray-100 text-black flex px-2 flex-wrap gap-4 py-3 transition-all duration-500 ${
           hovered ? "translate-y-0" : "translate-y-full"
         }`}
       >
@@ -44,6 +46,9 @@ const HomeProductCard = ({ product }) => {
             </span>
           );
         })}
+      </div>
+      <div className="absolute top-3 right-3 bg-white text-black px-2 py-2 text-sm font-semibold rounded-full">
+        <PiHeartStraight size={20} />
       </div>
     </div>
   );
