@@ -7,7 +7,7 @@ import "swiper/css/navigation";
 
 import HomeProductCard from "../Card/HomeProductCard";
 
-const MenHome = () => {
+const WomenHome = () => {
   const prevRef = useRef(null);
   const nextRef = useRef(null);
 
@@ -18,42 +18,42 @@ const MenHome = () => {
     {
       id: 1,
       name: "Performance Gym Pants",
-      image1: "men/image1.webp",
-      image2: "men/image2.webp",
+      image1: "women/image1.webp",
+      image2: "women/image2.webp",
       sizes: ["S", "M", "L", "XL"],
     },
     {
       id: 2,
       name: "Training Shorts",
-      image1: "men/image1.webp",
-      image2: "men/image2.webp",
+      image1: "women/img3.jpg",
+      image2: "women/img4.jpg",
       sizes: ["M", "L", "XL"],
     },
     {
       id: 3,
       name: "Muscle Fit T-shirt",
-      image1: "men/image1.webp",
-      image2: "men/image2.webp",
+      image1: "women/img4.jpg",
+      image2: "women/img3.jpg",
       sizes: ["S", "M", "L", "XL", "XXL"],
     },
     {
       id: 4,
       name: "Hooded Sweatshirt",
-      image1: "men/image1.webp",
-      image2: "men/image2.webp",
+      image1: "women/img6.png",
+      image2: "women/img4.jpg",
       sizes: ["M", "L", "XL"],
     },
     {
       id: 5,
       name: "Zip Hoodie",
-      image1: "men/image1.webp",
+      image1: "women/img7.jpg",
       image2: "men/image2.webp",
       sizes: ["S", "M", "L"],
     },
     {
       id: 6,
       name: "Tank Top",
-      image1: "men/image1.webp",
+      image1: "women/image2.webp",
       image2: "men/image2.webp",
       sizes: ["M", "L", "XL"],
     },
@@ -62,11 +62,11 @@ const MenHome = () => {
   return (
     <div className="h-[85vh] w-full">
       <div className="px-5 md:px-10 lg:px-12 pt-10">
-        <h2 className="text-xl font-bold text-gray-700">Mens</h2>
+        <h2 className="text-xl font-bold text-gray-700">Womens</h2>
         <div className="flex items-center justify-between gap-x-5">
           <div className="flex items-center gap-x-5">
             <p className="py-3 text-2xl font-bold text-black">
-              Now live: The perfect lifter’s pants
+              THE VIRAL DIPPED WAISTBAND LEGGING IS BACK
             </p>
             <button className="underline text-xl font-semibold cursor-pointer hover:text-gray-700">
               View All
@@ -145,4 +145,4 @@ const MenHome = () => {
   );
 };
 
-export default MenHome;
+export default WomenHome;
