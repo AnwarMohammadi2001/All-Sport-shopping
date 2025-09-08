@@ -99,11 +99,11 @@ const WomenHome = () => {
         </div>
       </div>
 
-      {/* Swiper Slider */}
+ 
       <Swiper
         modules={[Navigation]}
         spaceBetween={0}
-        slidesPerView={4.3} // default (desktop)
+        slidesPerView={4.3} 
         slidesOffsetBefore={40}
         slidesOffsetAfter={30}
         breakpoints={{
